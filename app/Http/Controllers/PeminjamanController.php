@@ -101,12 +101,7 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, Peminjaman $peminjaman): RedirectResponse
     {
-        $data = $request->validate([
-            'barang_id' => [
-                'required',
-                'integer',
-                Rule::exists('barangs', 'id')->where('user_id', Auth::id()),
-            ],
+        $data = $request->validate(['barang_id' => ['required','integer',Rule::exists('barangs', 'id')->where('user_id', Auth::id()),],
             'nama_peminjam' => ['required', 'string', 'max:255'],
             'jumlah_pinjam' => ['required', 'integer', 'min:1'],
             'tanggal_pinjam' => ['required', 'date'],
